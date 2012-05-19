@@ -70,7 +70,7 @@ module DMG
     end
 
     def mounted?
-      !!`hdiutil info`[/image-path.*#{dmg_file}/]
+      !!`hdiutil info`[/image-path.*#{volume_dir}/]
     end
 
     def download
@@ -78,7 +78,11 @@ module DMG
     end
 
     def mount
-      run_cmd "hdid '#{dmg_file}'"
+      run_cmd "hdid '#{dmg_file}' -mountpoint #{mountpoint}"
+    end
+
+    def mountpoint
+      "/Volumes/#{volume_dir}"
     end
 
     def open_mpkg

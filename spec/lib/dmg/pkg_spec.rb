@@ -76,6 +76,7 @@ describe DMG::Pkg do
       its(:package) { should == "LaunchBar" }
       its(:url) { should == "http://example.com/launchbar.dmg" }
       its(:volume_dir) { should == "LaunchBar" }
+      its(:mountpoint) { should == "/Volumes/LaunchBar" }
       its(:mpkg) { should be_nil }
     end
 
@@ -85,6 +86,7 @@ describe DMG::Pkg do
       its(:package) { should == "LaunchBar" }
       its(:volume_dir) { should == "LaunchBarDMG" }
       its(:mpkg) { should == "install.mpkg" }
+      its(:mountpoint) { should == "/Volumes/LaunchBarDMG" }
     end
 
     context "when the name, package or url is missing" do
