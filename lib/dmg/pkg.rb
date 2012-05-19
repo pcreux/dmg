@@ -26,8 +26,6 @@ module DMG
       @mpkg = args['mpkg']
     end
 
-    protected
-
     def self.all
       return @@all if defined?(@@all)
       @@all = []

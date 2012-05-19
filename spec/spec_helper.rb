@@ -8,9 +8,8 @@ Bundler.load
 require 'rspec'
 require 'dmg'
 
-Rspec.configure do |config|
+RSpec.configure do |config|
   config.mock_with :rspec
 end
 
 ENV['DMG_HOME'] = File.join(File.dirname(__FILE__), '..', 'tmp', 'aruba')
-

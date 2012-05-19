@@ -1,4 +1,5 @@
 require 'yaml'
+require 'fileutils'
 
 module DMG
   extend self
@@ -20,7 +21,7 @@ module DMG
   end
 
   def default_configuration
-    ['https://github.com/pcreux/dmg-pkgs/raw/master/pkgs.yml']
+    ['https://raw.github.com/pcreux/dmg-pkgs/master/pkgs.yml']
   end
 
   def setup!
@@ -30,9 +31,7 @@ module DMG
   end
 
   def create_dmg_directory_if_needed
-    unless File.directory?(config_dir)
-      Dir::mkdir(config_dir)
-    end
+    FileUtils.mkdir_p(config_dir)
   end
 
   def generate_default_source_file_if_needed

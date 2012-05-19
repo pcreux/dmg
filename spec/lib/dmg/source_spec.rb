@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe DMG::Source do
 
-  let(:pkgs_1_path) { File.join(File.dirname(__FILE__), '..', 'data', 'pkgs_1.yml') }
-  let(:pkgs_2_path) { File.join(File.dirname(__FILE__), '..', 'data', 'pkgs_2.yml') }
-  let(:pkgs_1_url) { 'https://github.com/versapay/dmg/raw/master/spec/data/pkgs_1.yml' }
+  let(:pkgs_1_path) { File.join(File.dirname(__FILE__), '..', '..', 'data', 'pkgs_1.yml') }
+  let(:pkgs_2_path) { File.join(File.dirname(__FILE__), '..', '..', 'data', 'pkgs_2.yml') }
+  let(:pkgs_1_url) { 'https://raw.github.com/gist/2730480/d88ecb9a8a15cbdce57e0b985f7c0e21c34f0c0c/pkgs.yml' }
 
   describe "#initialize" do
     context "when given a path to a yaml file" do
@@ -22,7 +22,8 @@ describe DMG::Source do
 
   describe "#download_and_combine" do
     before do
-      File.open(DMG.sources_file, 'w') { |f| f.write [pkgs_1_path, pkgs_2_path].to_yaml }
+      DMG.setup!
+      File.open(DMG.sources_file, 'w+') { |f| f.write [pkgs_1_path, pkgs_2_path].to_yaml }
       DMG::Source.download_and_combine
     end
 
