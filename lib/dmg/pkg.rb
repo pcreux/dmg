@@ -18,7 +18,7 @@ module DMG
 
     def initialize(args)
       @name = args['name']
-      @package = args['package']
+      @package = args['package'] || @name.capitalize
       @url = args['url']
       @volume_dir = args['volume_dir'] || @package
       @mpkg = args['mpkg']

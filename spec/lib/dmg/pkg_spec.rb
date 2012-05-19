@@ -89,6 +89,12 @@ describe DMG::Pkg do
       its(:mountpoint) { should == "/Volumes/LaunchBarDMG" }
     end
 
+    context "default package" do
+      let(:pkg) { DMG::Pkg.new("name" => "foo") }
+
+      it { pkg.package.should == "Foo" }
+    end
+
     context "when the name, package or url is missing" do
       it "should raise an exception"
     end
