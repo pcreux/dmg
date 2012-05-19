@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
-require File.dirname(__FILE__) + '/../lib/dmg'
+
+require 'pathname'
+lib = Pathname.new(__FILE__).dirname.join('..', 'lib').expand_path
+$LOAD_PATH.unshift lib.to_s
+
+begin require 'rubygems'; rescue LoadError; end
+require 'dmg'
 
 DMG::CLI.run!
