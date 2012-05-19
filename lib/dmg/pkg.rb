@@ -90,7 +90,7 @@ module DMG
     end
 
     def copy_app
-      run_cmd "sudo cp -fr '/Volumes/#{volume_dir}/#{package}.app' '#{destination}'"
+      run_cmd "sudo rsync -avzq '/Volumes/#{volume_dir}/#{package}.app' '#{destination}'"
       run_cmd "hdiutil detach '/Volumes/#{volume_dir}'"
       run_cmd "sudo chmod 755 '#{destination}/#{package}.app/Contents/MacOS/#{package}'"
     end
