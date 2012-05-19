@@ -13,6 +13,16 @@ describe DMG::Source do
       its(:pkgs_hash) { should == YAML.load_file(pkgs_1_path) }
     end
 
+    context "when given a relative path to a yaml file" do
+      before do
+        DMG.stub(:config_dir).and_return(File.join(File.dirname(__FILE__), '..', '..', 'data'))
+      end
+
+      subject { DMG::Source.new("./pkgs_1.yml") }
+
+      its(:pkgs_hash) { should == YAML.load_file(pkgs_1_path) }
+    end
+
     context "when given a url" do
       subject { DMG::Source.new(pkgs_1_url) }
 

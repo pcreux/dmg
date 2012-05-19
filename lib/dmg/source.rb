@@ -60,7 +60,7 @@ module DMG
 
     # Return file content from a path
     def read_file(path)
-      File.read(path)
+      File.read(File.expand_path(path, DMG.config_dir))
     end
   end
 end

@@ -10,10 +10,8 @@ module DMG
     end
 
     def self.find!(pkg_name)
-      pkg = all.select { |pkg| pkg.name == pkg_name }.first
-      raise PackageNotFound, "Can't find a package called '#{pkg_name}'" unless pkg
-
-      pkg
+      pkg = all.detect { |pkg| pkg.name == pkg_name }
+      pkg || raise(PackageNotFound, "Can't find a package called '#{pkg_name}'")
     end
 
     attr_reader :name, :package, :url, :volume_dir, :mpkg
@@ -37,7 +35,7 @@ module DMG
     end
 
     def self.hash_from_yaml
-      YAML.load_file(File.dirname(__FILE__) + '/pkgs.yml')
+      YAML.load_file(DMG.combined_pkgs_file)
     end
 
     include OutputHelpers
