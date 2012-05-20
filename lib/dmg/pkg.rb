@@ -25,13 +25,9 @@ module DMG
     end
 
     def self.all
-      return @@all if defined?(@@all)
-      @@all = []
-      hash_from_yaml.each do |key, values|
-        @@all << Pkg.new({'name' => key}.merge(values))
+      @all ||= hash_from_yaml.map do |key, values|
+        Pkg.new({'name' => key}.merge!(values))
       end
-
-      @@all
     end
 
     def self.hash_from_yaml
