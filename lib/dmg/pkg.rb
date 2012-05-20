@@ -1,17 +1,31 @@
 module DMG
   class Pkg
-    def self.list
-      all.map(&:name).sort
-    end
+    include OutputHelpers
 
-    def self.install(pkg_names)
-      pkgs = pkg_names.map { |pkg_name| find!(pkg_name) }
-      pkgs.each(&:install!)
-    end
+    class << self
+      def list
+        all.map(&:name).sort
+      end
 
-    def self.find!(pkg_name)
-      pkg = all.detect { |pkg| pkg.name == pkg_name }
-      pkg || raise(PackageNotFound, "Can't find a package called '#{pkg_name}'")
+      def install(pkg_names)
+        pkgs = pkg_names.map { |pkg_name| find!(pkg_name) }
+        pkgs.each(&:install!)
+      end
+
+      def find!(pkg_name)
+        pkg = all.detect { |pkg| pkg.name == pkg_name }
+        pkg || raise(PackageNotFound, "Can't find a package called '#{pkg_name}'")
+      end
+
+      def all
+        @all ||= hash_from_yaml.map do |key, values|
+          Pkg.new({'name' => key}.merge!(values))
+        end
+      end
+
+      def hash_from_yaml
+        YAML.load_file(DMG.combined_pkgs_file)
+      end
     end
 
     attr_reader :name, :package, :url, :volume_dir, :mpkg
@@ -23,18 +37,6 @@ module DMG
       @volume_dir = args['volume_dir'] || @package
       @mpkg = args['mpkg']
     end
-
-    def self.all
-      @all ||= hash_from_yaml.map do |key, values|
-        Pkg.new({'name' => key}.merge!(values))
-      end
-    end
-
-    def self.hash_from_yaml
-      YAML.load_file(DMG.combined_pkgs_file)
-    end
-
-    include OutputHelpers
 
     def install!
       if downloaded?
