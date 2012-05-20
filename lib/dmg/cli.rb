@@ -1,26 +1,15 @@
-class DMG::CLI
-  class << self
-    include OutputHelpers
+require 'thor'
 
-    def run!
+module DMG
+  class CLI < Thor
+    desc "install PACKAGES", "Install supplied packages"
+    def install(*packages)
+      DMG::Pkg.install(packages)
+    end
 
-      DMG.setup!
-
-      case ARGV[0]
-      when "install"
-        DMG::Pkg.install(ARGV[1..-1])
-      when "list"
-        puts DMG::Pkg.list
-      else
-        puts <<-EOF
-  Usage: 
-    dmg install PACKAGE
-    dmg list
-  EOF
-      end
-
-    rescue DMG::DMGError => e
-      alert(e.message)
+    desc "list", "List available packages"
+    def list
+      puts DMG::Pkg.list
     end
   end
 end

@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
 
-
 require 'pathname'
 lib = Pathname.new(__FILE__).dirname.join('..', 'lib').expand_path
 $LOAD_PATH.unshift lib.to_s
 
 begin require 'rubygems'; rescue LoadError; end
 require 'dmg'
+require 'dmg/cli'
 
-DMG::CLI.run!
+DMG.setup!
+DMG::CLI.start

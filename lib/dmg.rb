@@ -45,6 +45,6 @@ module DMG
   end
 end
 
-%w{errors output_helpers source pkg cli}.each do |file|
+%w{errors output_helpers source pkg}.each do |file|
   require File.dirname(__FILE__) + "/dmg/#{file}"
 end
