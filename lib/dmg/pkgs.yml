@@ -1,0 +1,27 @@
+#  Does not work because of a broken symlink in the dmg
+#dropbox:
+#  package: Dropbox
+#  volume_dir: Dropbox Installer
+#  url: "http://www.dropbox.com/download?plat=mac"
+
+chrome:
+  package: Google Chrome
+  url: "https://dl-ssl.google.com/chrome/mac/stable/GGRM/googlechrome.dmg"
+  
+skype:
+  package: Skype
+  url: http://www.skype.com/go/getskype-macosx.dmg
+
+picasa:
+  package: Picasa
+  volume_dir: Picasa 3.8.9
+  url: http://dl.google.com/photos/picasamac38.dmg
+
+virtualbox:
+  package: VirtualBox
+  url: http://download.virtualbox.org/virtualbox/4.0.4/VirtualBox-4.0.4-70112-OSX.dmg
+  mpkg: VirtualBox
+
+launchbar:
+  package: LaunchBar
+  url: http://www.obdev.at/downloads/launchbar/LaunchBar-5.0.4.dmg
